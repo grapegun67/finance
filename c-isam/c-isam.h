@@ -9,20 +9,20 @@
 
 typedef struct element {
 
-		char name[NAME_LENGTH];
+	char name[NAME_LENGTH];
 
 }Element;
 
 typedef struct node {
 
-		Element data;
-			struct node* next;
+	Element data;
+	struct node* next;
 
 }Node;
 
 
 int hash_func(char* name);
-void print_hash_table(Node* hash_table);
-
+void print_hash_table(Node hash_table[]);
+void insert_hash_table(Node hash_table[]);
 
 
