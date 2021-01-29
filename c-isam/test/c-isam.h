@@ -13,5 +13,8 @@ typedef struct data{
 	int money;
 }Data;
 
-
 int hash_func(char* name);
+void input_value();
+void print_value();
+void print_file();
+void print_all();

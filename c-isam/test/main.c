@@ -4,11 +4,9 @@
 
 int main()
 {
-	int index, money, flag;
-	FILE *file_hash_table[ODDNUM];
-	char name[NAME_LENGTH];
+	int flag, nodata;
 	char buf[ODDNUM];
-	Data data_buf;
+	FILE *file_hash_table[ODDNUM];
 
 	for(int i = 0; i < ODDNUM; i++){
 
@@ -24,53 +22,25 @@ int main()
 
 	while(1){
 
-		printf("1. 입력 2. 출력 3.전체출력\n");
+		printf("1. 입력 2. 해당문자출력 3.해당문자의 파일 출력 4.모든파일내용\n");
 		scanf("%d", &flag);
 
 		switch(flag)
 		{
 		case 1:
-
-			printf("문자열을 입력하세요\n");
-			scanf("%s", name);
-
-			printf("돈을 입력하세요\n");	
-			scanf("%d", &money);
-
-			memset(&data_buf, 0, sizeof(data_buf));
-			strncpy(data_buf.name, name, sizeof(name));
-			data_buf.money = money;
-
-			index = hash_func(name);
-			
-			fseek(file_hash_table[index], 0, SEEK_END);
-			if(fwrite(&data_buf, sizeof(data_buf), 1, file_hash_table[index]) == 0){
-				perror("fwrite()-error\n");
-				return 0;
-			}
-
+			input_value(file_hash_table);
 			break;
+
 		case 2:
-			
-			printf("문자열을 입력하세요\n");
-			scanf("%s", name);
-
-			index = hash_func(name);
-			memset(&data_buf, 0 ,sizeof(data_buf));
-
-			fseek(file_hash_table[index], 0, SEEK_SET);
-			if(fread(&data_buf, sizeof(data_buf), 1, file_hash_table[index]) == 0){
-		
-				perror("fread()-error\n");
-				return 0;
-			}
-
-			printf("result: %s %d\n", data_buf.name, data_buf.money);
-
+			print_value(file_hash_table);
 			break;
+
 		case 3:
+			print_file(file_hash_table);
+			break;
 
-
+		case 4:
+			print_all(file_hash_table);
 			break;
 		}
 	}
